@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 import { CssBaseline, Grid } from '@material-ui/core';
 
-import { getPlacesData, getCoordinates } from './api/';
+import { getPlacesData, getLocation } from './api/';
 
 import Header from './components/Header/Header';
 import List from './components/List/List';
@@ -14,44 +14,47 @@ const App = () => {
 
     const [searchQuery, setSearchQuery] = useState('');
     const [coordinates, setCoordinates] = useState([]);
+    const [location, setLocations] = useState(295424);
 
     const handleSearchChange = (event) => {
         setSearchQuery(event.target.value);
     };
 
     useEffect(() => {
-        getCoordinates()
+        getLocation()
             .then((data) => {
-                // console.log(data.features);
-                setCoordinates(data.features);
+                console.log(data)
+                setLocations(data[0].result_object.location_id);
             })
     }, []);
 
-    console.log(coordinates);
+    // useEffect(() => {
+    //     getCoordinates()
+    //         .then((data) => {
+    //             // console.log(data.features);
+    //             setCoordinates(data.features);
+    //         })
+    // }, []);
 
-    const lng = coordinates[0]?.geometry?.coordinates[0];
-    const lat = coordinates[0]?.geometry?.coordinates[1];
+    // console.log(coordinates);
 
+    // const lng = coordinates[0]?.geometry?.coordinates[0];
+    // const lat = coordinates[0]?.geometry?.coordinates[1];
 
     // coordinates?.map((coordinate, i) => {
     //     const lng = coordinate.geometry.coordinates[0];
     //     const lat = coordinate.geometry.coordinates[1];
-    //     console.log(lng); // Log the latitude to console
-    //     // You can perform other operations with lng and lat here
-    //     // Make sure to return JSX elements if you want to render them in the UI
-    //     return null; // or return JSX elements here
-    // })
+    //     console.log(lng); 
+    //     return null; 
 
 
     useEffect(() => {
-        getPlacesData(lng, lat)
+        getPlacesData(location)
             .then((data) => {
                 console.log(data);
                 setPlaces(data);
             })
-    }, [lng, lat]);
-
-
+    }, [location]);
 
     return (
         <>

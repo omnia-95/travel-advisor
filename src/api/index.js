@@ -1,19 +1,23 @@
 
 import axios from 'axios';
 
-const URL2 = 'https://photon.komoot.io/api/?'
 
-const options2 = {
+const URL = 'https://travel-advisor.p.rapidapi.com/locations/search'
+
+const options3 = {
     params: {
-        q: 'dubai',
+        query: 'dubai',
         limit: '1'
     },
-
+    headers: {
+        'X-RapidAPI-Key': 'ebcf5818cdmsh14c4e6cd6b14d28p141a03jsna85055a883ba',
+        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
+    }
 };
 
-export const getCoordinates = async () => {
+export const getLocation = async () => {
     try {
-        const { data } = await axios.get(URL2, options2);
+        const { data: { data } } = await axios.get(URL, options3);
         return data;
     } catch (error) {
         console.log(error)
@@ -21,19 +25,16 @@ export const getCoordinates = async () => {
 }
 
 
-const URL = 'https://travel-advisor.p.rapidapi.com/attractions/list-by-latlng'
+
+const URL2 = 'https://travel-advisor.p.rapidapi.com/attractions/list'
 
 
 
-export const getPlacesData = async (lng, lat) => {
+export const getPlacesData = async (location) => {
     try {
-        const { data: { data } } = await axios.get(URL, {
+        const { data: { data } } = await axios.get(URL2, {
             params: {
-                longitude: lng,
-                latitude: lat,
-                lunit: 'km',
-                currency: 'USD',
-                lang: 'en_US'
+                location_id: location
             },
             headers: {
                 'X-RapidAPI-Key': 'ebcf5818cdmsh14c4e6cd6b14d28p141a03jsna85055a883ba',
@@ -50,58 +51,8 @@ export const getPlacesData = async (lng, lat) => {
 
 
 
-// import axios from 'axios';
-
-// const URL = 'https://travel-advisor.p.rapidapi.com/attractions/list'
-
-// const options = {
-//     params: {
-//         location_id: '298571',
-//         sort: 'recommended'
-//     },
-//     headers: {
-//         'X-RapidAPI-Key': 'ebcf5818cdmsh14c4e6cd6b14d28p141a03jsna85055a883ba',
-//         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-//     }
-// };
-
-// export const getPlacesData = async () => {
-//     try {
-//         const { data: { data } } = await axios.get(URL, options);
-
-//         return data;
-
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
 
 
 
 
 
-// import axios from 'axios';
-
-// const URL = 'https://travel-advisor.p.rapidapi.com/locations/v2/auto-complete'
-
-// const options = {
-//     params: {
-//         query: 'paris',
-//     },
-//     headers: {
-//         'X-RapidAPI-Key': 'ebcf5818cdmsh14c4e6cd6b14d28p141a03jsna85055a883ba',
-//         'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-//     }
-// };
-
-
-// export const getPlacesData = async () => {
-//     try {
-//         const { data: { data } } = await axios.get(URL, options);
-
-//         return data;
-
-//     } catch (error) {
-//         console.log(error)
-//     }
-// }
