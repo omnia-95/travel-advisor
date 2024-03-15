@@ -22,18 +22,36 @@ const App = () => {
     useEffect(() => {
         getCoordinates()
             .then((data) => {
-                console.log(data);
-                setCoordinates(data);
+                // console.log(data.features);
+                setCoordinates(data.features);
             })
     }, []);
 
+    console.log(coordinates);
+
+    const lng = coordinates[0]?.geometry?.coordinates[0];
+    const lat = coordinates[0]?.geometry?.coordinates[1];
+
+
+    // coordinates?.map((coordinate, i) => {
+    //     const lng = coordinate.geometry.coordinates[0];
+    //     const lat = coordinate.geometry.coordinates[1];
+    //     console.log(lng); // Log the latitude to console
+    //     // You can perform other operations with lng and lat here
+    //     // Make sure to return JSX elements if you want to render them in the UI
+    //     return null; // or return JSX elements here
+    // })
+
+
     useEffect(() => {
-        getPlacesData()
+        getPlacesData(lng, lat)
             .then((data) => {
                 console.log(data);
                 setPlaces(data);
             })
-    }, []);
+    }, [lng, lat]);
+
+
 
     return (
         <>
