@@ -6,46 +6,43 @@ import { getPlacesData, getLocation } from './api/';
 
 import Header from './components/Header/Header';
 import List from './components/List/List';
-import Map from './components/Map/Map';
+// import SearchComponent from './components/SearchComponent/SearchComponent';
 
 const App = () => {
 
-    const [places, setPlaces] = useState([]);
 
-    const [searchQuery, setSearchQuery] = useState('');
-    const [coordinates, setCoordinates] = useState([]);
+
+    const [places, setPlaces] = useState([]);
     const [location, setLocations] = useState(295424);
 
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
+    // const handleSearchChange = (event) => {
+    //     setSearchQuery(event.target.value);
+    // };
+
+    // const onLoad = (autoC) => setAutocomplete(autoC);
+
+    const [searchInput, setSearchInput] = useState('dubai');
+
+    // useEffect(() => {
+    //     SearchComponent()
+    //         .then((searchInput) => {
+    //             console.log()
+    //             setSearchInput(searchInput);
+    //         })
+    // }, []);
+
+    // const searchInput = document.getElementById('searchInput');
+
+
+    console.log(searchInput);
 
     useEffect(() => {
-        getLocation()
+        getLocation(searchInput)
             .then((data) => {
                 console.log(data)
                 setLocations(data[0].result_object.location_id);
             })
-    }, []);
-
-    // useEffect(() => {
-    //     getCoordinates()
-    //         .then((data) => {
-    //             // console.log(data.features);
-    //             setCoordinates(data.features);
-    //         })
-    // }, []);
-
-    // console.log(coordinates);
-
-    // const lng = coordinates[0]?.geometry?.coordinates[0];
-    // const lat = coordinates[0]?.geometry?.coordinates[1];
-
-    // coordinates?.map((coordinate, i) => {
-    //     const lng = coordinate.geometry.coordinates[0];
-    //     const lat = coordinate.geometry.coordinates[1];
-    //     console.log(lng); 
-    //     return null; 
+    }, [searchInput]);
 
 
     useEffect(() => {
@@ -57,9 +54,10 @@ const App = () => {
     }, [location]);
 
     return (
+
         <>
             <CssBaseline />
-            <Header />
+            <Header setSearchInput={setSearchInput} />
             <Grid container spacing={3} style={{ width: '100%' }} >
                 <Grid >
                     <List places={places} />

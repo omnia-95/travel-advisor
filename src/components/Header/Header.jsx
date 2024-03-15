@@ -5,24 +5,8 @@ import SearchIcon from '@material-ui/icons/Search';
 
 import useStyles from './styles';
 
-const Header = () => {
+const Header = ({ setSearchInput, searchInput }) => {
     const classes = useStyles();
-    // const [autocomplete, setAutocomplete] = useState(null);
-
-    // const onLoad = (autoC) => setAutocomplete(autoC);
-
-    // const onPlaceChanged = () => {
-    //     const lat = autocomplete.getPlace().geometry.location.lat();
-    //     const lng = autocomplete.getPlace().geometry.location.lng();
-
-    //     setCoordinates({ lat, lng });
-    // }
-
-    const [searchQuery, setSearchQuery] = useState('');
-
-    const handleSearchChange = (event) => {
-        setSearchQuery(event.target.value);
-    };
 
     return (
         <AppBar position='static'>
@@ -34,19 +18,20 @@ const Header = () => {
                     <Typography variant="h6" className={classes.title}>
                         Explore new places
                     </Typography>
-                    {/* <Autocomplete onLoad={onLoad} onPlaceChanged={onPlaceChanged}> */}
-                    <div className={classes.search}>
-                        <div className={classes.searchIcon}>
-                            <SearchIcon />
-                        </div>
+                    <div id="searchContainer">
                         <InputBase
+                            id="searchInput"
                             placeholder="Search..."
-                            classes={{ root: classes.inputRoot, input: classes.inputInput }}
-                            value={searchQuery}
-                            onChange={handleSearchChange}
+                            // onChange={(event) => {
+                            //     setSearchInput(event.target.value);
+                            // }}
+                            onKeyDown={(event) => {
+                                if (event.key === 'Enter') {
+                                    setSearchInput(event.target.value);
+                                }
+                            }}
                         />
                     </div>
-                    {/* </Autocomplete> */}
                 </Box>
             </Toolbar>
         </AppBar>

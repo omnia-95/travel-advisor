@@ -4,20 +4,18 @@ import axios from 'axios';
 
 const URL = 'https://travel-advisor.p.rapidapi.com/locations/search'
 
-const options3 = {
-    params: {
-        query: 'dubai',
-        limit: '1'
-    },
-    headers: {
-        'X-RapidAPI-Key': 'ebcf5818cdmsh14c4e6cd6b14d28p141a03jsna85055a883ba',
-        'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
-    }
-};
-
-export const getLocation = async () => {
+export const getLocation = async (searchInput) => {
     try {
-        const { data: { data } } = await axios.get(URL, options3);
+        const { data: { data } } = await axios.get(URL, {
+            params: {
+                query: searchInput,
+                limit: '1'
+            },
+            headers: {
+                'X-RapidAPI-Key': 'ebcf5818cdmsh14c4e6cd6b14d28p141a03jsna85055a883ba',
+                'X-RapidAPI-Host': 'travel-advisor.p.rapidapi.com'
+            }
+        });
         return data;
     } catch (error) {
         console.log(error)
