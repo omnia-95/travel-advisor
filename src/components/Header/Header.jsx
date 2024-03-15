@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { Autocomplete } from '@material-ui/lab';
 import { AppBar, Box, InputBase, Toolbar, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 
@@ -22,9 +21,6 @@ const Header = ({ setSearchInput, searchInput }) => {
                         <InputBase
                             id="searchInput"
                             placeholder="Search..."
-                            // onChange={(event) => {
-                            //     setSearchInput(event.target.value);
-                            // }}
                             onKeyDown={(event) => {
                                 if (event.key === 'Enter') {
                                     setSearchInput(event.target.value);

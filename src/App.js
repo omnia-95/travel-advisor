@@ -6,7 +6,6 @@ import { getPlacesData, getLocation } from './api/';
 
 import Header from './components/Header/Header';
 import List from './components/List/List';
-// import SearchComponent from './components/SearchComponent/SearchComponent';
 
 const App = () => {
 
@@ -15,23 +14,8 @@ const App = () => {
     const [places, setPlaces] = useState([]);
     const [location, setLocations] = useState(295424);
 
-    // const handleSearchChange = (event) => {
-    //     setSearchQuery(event.target.value);
-    // };
-
-    // const onLoad = (autoC) => setAutocomplete(autoC);
 
     const [searchInput, setSearchInput] = useState('dubai');
-
-    // useEffect(() => {
-    //     SearchComponent()
-    //         .then((searchInput) => {
-    //             console.log()
-    //             setSearchInput(searchInput);
-    //         })
-    // }, []);
-
-    // const searchInput = document.getElementById('searchInput');
 
 
     console.log(searchInput);
@@ -62,15 +46,7 @@ const App = () => {
                 <Grid >
                     <List places={places} />
                 </Grid>
-                {/* <Grid item xs={12} md={4}>
-                    <List places={places} />
-                </Grid>
-                <Grid item xs={12} md={8}>
-                    <Map />
-                </Grid> */}
             </Grid>
-            {/* setCoordinates={setCoordinates}
-            coordinates={coordinates} */}
         </>
     );
 }

@@ -9,8 +9,8 @@ import useStyles from './styles';
 
 const PlaceDetails = ({ place }) => {
     const classes = useStyles();
-
     return (
+
         <Card elevation={6}>
             <CardMedia
                 style={{ height: 350 }}
